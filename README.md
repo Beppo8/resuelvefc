@@ -1,21 +1,207 @@
 # ResuelveFc
-
-**TODO: Add description**
-
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `resuelve_fc` to your list of dependencies in `mix.exs`:
+Instala dependencias:
 
-```elixir
-def deps do
-  [
-    {:resuelve_fc, "~> 0.1.0"}
-  ]
-end
+```=elixir
+mix deps.get
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/resuelve_fc>.
+Puedes hacer uso del codigo mediante las pruebas bajo el nombre `resuelve_fc_test.exs`
+De otra forma si quieres probar mediante iex puedes seguir los siguientes pasos
 
+- Copiar el siguiente input en iex:
+```=elixir
+input_json = %{
+        "jugadores" => [
+          %{
+            "bono" => 25000,
+            "equipo" => "rojo",
+            "goles" => 10,
+            "nivel" => "C",
+            "nombre" => "Juan Perez",
+            "sueldo" => 50000,
+            "sueldo_completo" => nil
+          },
+          %{
+            "bono" => 30000,
+            "equipo" => "azul",
+            "goles" => 30,
+            "nivel" => "Cuauh",
+            "nombre" => "EL Cuauh",
+            "sueldo" => 100_000,
+            "sueldo_completo" => nil
+          },
+          %{
+            "bono" => 10000,
+            "equipo" => "azul",
+            "goles" => 7,
+            "nivel" => "A",
+            "nombre" => "Cosme Fulanito",
+            "sueldo" => 20000,
+            "sueldo_completo" => nil
+          },
+          %{
+            "bono" => 15000,
+            "equipo" => "rojo",
+            "goles" => 9,
+            "nivel" => "B",
+            "nombre" => "El Rulo",
+            "sueldo" => 30000,
+            "sueldo_completo" => nil
+          }
+        ]
+      }
+```
+
+- Para posteriormente pasar el input a la siguiente funcion:
+```=elixir
+ResuelveFc.calculate_salaries(input_json["jugadores"])
+```
+
+- Si quieres agregar otro equipos lo unico que tienes que hacer es lo siguiente:
+```=elixir
+input = %{
+        "equipos" => [
+          %{
+            "nombre_equipo" => "Resuelve FC",
+            "jugadores" => [
+              %{
+                "nombre" => "Player 1",
+                "nivel" => "A",
+                "equipo" => "rojo",
+                "goles" => 8,
+                "bono" => 5000,
+                "sueldo" => 20000
+              },
+              %{
+                "nombre" => "Player 2",
+                "nivel" => "B",
+                "equipo" => "azul",
+                "goles" => 15,
+                "bono" => 8000,
+                "sueldo" => 25000
+              },
+              %{
+                "nombre" => "Player 3",
+                "nivel" => "C",
+                "equipo" => "verde",
+                "goles" => 20,
+                "bono" => 10000,
+                "sueldo" => 30000
+              },
+              %{
+                "nombre" => "Player 4",
+                "nivel" => "Cuauh",
+                "equipo" => "rojo",
+                "goles" => 25,
+                "bono" => 12000,
+                "sueldo" => 35000
+              }
+            ]
+          },
+          %{
+            "nombre_equipo" => "Otro Equipo",
+            "jugadores" => [
+              %{
+                "nombre" => "Player 5",
+                "nivel" => "A",
+                "equipo" => "azul",
+                "goles" => 10,
+                "bono" => 6000,
+                "sueldo" => 22000
+              },
+              %{
+                "nombre" => "Player 6",
+                "nivel" => "B",
+                "equipo" => "verde",
+                "goles" => 18,
+                "bono" => 9000,
+                "sueldo" => 27000
+              },
+              %{
+                "nombre" => "Player 7",
+                "nivel" => "C",
+                "equipo" => "rojo",
+                "goles" => 22,
+                "bono" => 11000,
+                "sueldo" => 32000
+              }
+            ]
+          }
+        ]
+      }
+
+      output = [
+        %{
+          "bono" => 5000,
+          "equipo" => "rojo",
+          "goles" => 8,
+          "nivel" => "A",
+          "nombre" => "Player 1",
+          "sueldo" => 20000,
+          "sueldo_completo" => 20008.0
+        },
+        %{
+          "bono" => 8000,
+          "equipo" => "azul",
+          "goles" => 15,
+          "nivel" => "B",
+          "nombre" => "Player 2",
+          "sueldo" => 25000,
+          "sueldo_completo" => 25024.0
+        },
+        %{
+          "bono" => 10000,
+          "equipo" => "verde",
+          "goles" => 20,
+          "nivel" => "C",
+          "nombre" => "Player 3",
+          "sueldo" => 30000,
+          "sueldo_completo" => 30040.0
+        },
+        %{
+          "bono" => 12000,
+          "equipo" => "rojo",
+          "goles" => 25,
+          "nivel" => "Cuauh",
+          "nombre" => "Player 4",
+          "sueldo" => 35000,
+          "sueldo_completo" => 35060.0
+        },
+        %{
+          "bono" => 6000,
+          "equipo" => "azul",
+          "goles" => 10,
+          "nivel" => "A",
+          "nombre" => "Player 5",
+          "sueldo" => 22000,
+          "sueldo_completo" => 22012.0
+        },
+        %{
+          "bono" => 9000,
+          "equipo" => "verde",
+          "goles" => 18,
+          "nivel" => "B",
+          "nombre" => "Player 6",
+          "sueldo" => 27000,
+          "sueldo_completo" => 27032.4
+        },
+        %{
+          "bono" => 11000,
+          "equipo" => "rojo",
+          "goles" => 22,
+          "nivel" => "C",
+          "nombre" => "Player 7",
+          "sueldo" => 32000,
+          "sueldo_completo" => 32048.4
+        }
+      ]
+
+
+    players = Enum.flat_map(input["equipos"], fn equipo ->
+        equipo["jugadores"]
+    end)
+
+    ResuelveFc.calculate_salaries(players)
+```
